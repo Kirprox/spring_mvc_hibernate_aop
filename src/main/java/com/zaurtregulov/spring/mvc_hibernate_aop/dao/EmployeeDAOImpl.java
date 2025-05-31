@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 
@@ -23,5 +24,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         Query query = session.createQuery("from Employee", Employee.class);
         List<Employee> allEmployees = query.getResultList();
         return allEmployees;
+    }
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(employee);
     }
 }
